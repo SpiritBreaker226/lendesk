@@ -1,5 +1,8 @@
 import { FC } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
+
+import { SignUp, ThankYou } from '../SignUp'
 
 const AppBodyConainer = styled.main.attrs<{ isAuth: boolean }>((props) => ({
   isAuth: props.isAuth || false,
@@ -27,7 +30,13 @@ const Content = styled.section`
 export const AppBody: FC = () => {
   return (
     <AppBodyConainer isAuth={false}>
-      <Content>Content</Content>
+      <Content>
+        <Routes>
+          <Route path="/sign-up" element={<SignUp />}>
+            <Route path="thank-you" element={<ThankYou />} />
+          </Route>
+        </Routes>
+      </Content>
     </AppBodyConainer>
   )
 }

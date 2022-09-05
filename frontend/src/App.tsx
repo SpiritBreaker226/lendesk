@@ -1,9 +1,13 @@
+import { BrowserRouter as Router } from 'react-router-dom'
+
 import { AppBody } from './AppBody'
 import { ThemeProvider } from './theme'
 
 const App = () => (
   <ThemeProvider>
-    <AppBody />
+    <Router>
+      <AppBody />
+    </Router>
   </ThemeProvider>
 )
 
