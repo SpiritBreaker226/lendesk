@@ -8,7 +8,9 @@ import { Login } from '../Login'
 // it form the componets
 
 const mockUseNavigate = jest.fn()
+const mockNavigate = jest.fn()
 const mockLogin = jest.fn()
+let mockIsAuth: boolean
 
 jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
@@ -16,10 +18,12 @@ const mockedAxios = axios as jest.Mocked<typeof axios>
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockUseNavigate,
+  Navigate: () => mockNavigate,
 }))
 
 jest.mock('../../helpers', () => ({
   ...jest.requireActual('../../helpers'),
+  isAuth: () => mockIsAuth,
   login: () => mockLogin,
 }))
 
@@ -35,6 +39,10 @@ describe('login', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Login' }))
   }
+
+  beforeEach(() => {
+    mockIsAuth = false
+  })
 
   it('should submit a valid form', async () => {
     mockedAxios.post.mockResolvedValue({ status: 201 })
@@ -80,5 +88,15 @@ describe('login', () => {
     fillForm()
 
     await screen.findByText(/fake email error message/i)
+  })
+
+  describe('when user is already login', () => {
+    it('should redirect to the profile', async () => {
+      mockIsAuth = true
+
+      setUp()
+
+      expect(screen.queryByText('Create account')).not.toBeInTheDocument()
+    })
   })
 })

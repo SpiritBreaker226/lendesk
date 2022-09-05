@@ -1,10 +1,10 @@
 import { Form, Formik } from 'formik'
 import { FC, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { FormErrorMessage, SubmitButton, Textbox } from '../Components'
-import { login } from '../helpers'
+import { isAuth, login } from '../helpers'
 import postSubmit from '../helpers/postSubmit'
 import { ApiPath, ServerError, NonAuthUser, AuthResponse } from '../Types'
 import { LoginSchema } from './LoginSchema'
@@ -39,6 +39,10 @@ type FormikValueType = Pick<NonAuthUser, 'email' | 'password'>
 export const Login: FC = () => {
   const [serverError, setServerError] = useState<ServerError>()
   const navigate = useNavigate()
+
+  if (isAuth()) {
+    return <Navigate to="/profile" replace={true} />
+  }
 
   return (
     <LoginContainer>
