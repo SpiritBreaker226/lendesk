@@ -64,7 +64,6 @@ describe('login', () => {
         }
       )
     )
-    await waitFor(() => expect(mockUseNavigate).toBeCalled())
   })
 
   it('should display error from server', async () => {
