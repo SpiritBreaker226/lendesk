@@ -1,10 +1,9 @@
 import { FC, ReactNode } from 'react'
 import styled from 'styled-components'
 
-const Button = styled.button`
-  padding: 8px 16px;
-  border: 1px solid ${(props) => props.theme.secondary};
-  border-radius: 4px;
+import { Button } from './Button'
+
+const ButtonContainer = styled(Button)`
   color: ${(props) => props.theme.secondary};
   background: ${(props) => props.theme.lendeskBlue};
 `
@@ -19,8 +18,8 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
   children,
 }) => {
   return (
-    <Button type="submit" disabled={isLoading}>
+    <ButtonContainer type="submit" isLoading={isLoading}>
       {children}
-    </Button>
+    </ButtonContainer>
   )
 }

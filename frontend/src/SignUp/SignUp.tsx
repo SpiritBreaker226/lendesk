@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import {
+  Button,
   FormErrorMessage,
   LendeskLogo,
   SubmitButton,
@@ -40,10 +41,7 @@ const ButtonContainer = styled.div`
   gap: 8px;
 `
 
-const ButtonCancel = styled.button`
-  padding: 8px 16px;
-  border: 1px solid ${(props) => props.theme.secondary};
-  border-radius: 4px;
+const ButtonCancel = styled(Button)`
   color: ${(props) => props.theme.text};
   background: ${(props) => props.theme.background};
 
