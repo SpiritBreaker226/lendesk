@@ -1,5 +1,7 @@
 import axios from 'axios'
-import { ApiPath, NonAuthUser } from '../../Types'
+
+import { user } from '../../testUtil'
+import { ApiPath } from '../../Types'
 import postSubmit from '../postSubmit'
 
 const mockOnSuccess = jest.fn()
@@ -9,18 +11,11 @@ jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
 
 describe('postSubmit', () => {
-  const defaultUser: NonAuthUser = {
-    firstName: 'James',
-    lastName: 'Smith',
-    email: 'jsmith@random-domain.com',
-    password: '917832asdf+1',
-  }
-
   describe('when request is success', () => {
     it('should call mockOnSuccess', async () => {
       mockedAxios.post.mockResolvedValue({})
 
-      await postSubmit(ApiPath.signup, defaultUser, mockOnSuccess, mockOnError)
+      await postSubmit(ApiPath.signup, user, mockOnSuccess, mockOnError)
 
       expect(mockOnSuccess).toBeCalled()
       expect(mockOnError).not.toBeCalled()
@@ -31,7 +26,7 @@ describe('postSubmit', () => {
     it('should display form error', async () => {
       mockedAxios.post.mockRejectedValue(new Error('fake error message'))
 
-      await postSubmit(ApiPath.signup, defaultUser, mockOnSuccess, mockOnError)
+      await postSubmit(ApiPath.signup, user, mockOnSuccess, mockOnError)
 
       expect(mockOnSuccess).not.toBeCalled()
       expect(mockOnError).toBeCalledWith({
@@ -45,7 +40,7 @@ describe('postSubmit', () => {
         new Error('email: fake email error message')
       )
 
-      await postSubmit(ApiPath.signup, defaultUser, mockOnSuccess, mockOnError)
+      await postSubmit(ApiPath.signup, user, mockOnSuccess, mockOnError)
 
       expect(mockOnSuccess).not.toBeCalled()
       expect(mockOnError).toBeCalledWith({
