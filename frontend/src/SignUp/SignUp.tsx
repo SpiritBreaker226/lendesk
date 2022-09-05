@@ -34,8 +34,22 @@ const FormGroup = styled.fieldset`
 `
 
 const ButtonContainer = styled.div`
-  text-align: right;
   margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+`
+
+const ButtonCancel = styled.button`
+  padding: 8px 16px;
+  border: 1px solid ${(props) => props.theme.secondary};
+  border-radius: 4px;
+  color: ${(props) => props.theme.text};
+  background: ${(props) => props.theme.background};
+
+  &:hover {
+    color: ${(props) => props.theme.secondary};
+  }
 `
 
 type FormikValues = NonAuthUser & { confirmPassword: string }
@@ -43,6 +57,8 @@ type FormikValues = NonAuthUser & { confirmPassword: string }
 export const SignUp: FC = () => {
   const [serverError, setServerError] = useState<ServerError>()
   const navigate = useNavigate()
+
+  const handleCancel = () => navigate('/')
 
   return (
     <SignUpContainer>
@@ -124,6 +140,7 @@ export const SignUp: FC = () => {
             </FormGroup>
 
             <ButtonContainer>
+              <ButtonCancel onClick={handleCancel}>Cancel</ButtonCancel>
               <SubmitButton isLoading={isSubmitting}>Sign Up</SubmitButton>
             </ButtonContainer>
           </Form>
