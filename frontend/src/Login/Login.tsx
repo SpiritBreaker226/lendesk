@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FormErrorMessage, SubmitButton, Textbox } from '../Components'
 import postSubmit from '../helpers/postSubmit'
-import { ApiPath, ServerError, User } from '../Types'
+import { ApiPath, ServerError, NonAuthUser } from '../Types'
 import { LoginSchema } from './LoginSchema'
 
 const LoginContainer = styled.section`
@@ -32,7 +32,7 @@ const CreateUserOrLogin = styled.div`
   align-items: center;
 `
 
-type FormikValueType = Pick<User, 'email' | 'password'>
+type FormikValueType = Pick<NonAuthUser, 'email' | 'password'>
 
 export const Login: FC = () => {
   const [serverError, setServerError] = useState<ServerError>()

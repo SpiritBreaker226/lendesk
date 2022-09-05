@@ -1,6 +1,6 @@
-import { User } from './User'
+import { NonAuthUser } from './User'
 
 export type ServerError = {
-  field?: keyof User
+  field?: keyof NonAuthUser
   errorMessage: string
 }

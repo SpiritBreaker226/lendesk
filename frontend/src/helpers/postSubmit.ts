@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-import { ApiPath, ServerError, User } from '../Types'
+import { ApiPath, ServerError, NonAuthUser } from '../Types'
 
-async function postSubmit<T = User>(
+async function postSubmit<T = NonAuthUser>(
   type: ApiPath,
   values: T,
   onSuccess: (values: unknown) => void,
@@ -21,7 +21,7 @@ async function postSubmit<T = User>(
 
       if (errorParts.length === 2) {
         onError({
-          field: errorParts[0] as keyof User,
+          field: errorParts[0] as keyof NonAuthUser,
           errorMessage: errorParts[1],
         })
 

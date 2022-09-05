@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ApiPath, User } from '../../Types'
+import { ApiPath, NonAuthUser } from '../../Types'
 import postSubmit from '../postSubmit'
 
 const mockOnSuccess = jest.fn()
@@ -9,7 +9,7 @@ jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
 
 describe('postSubmit', () => {
-  const defaultUser: User = {
+  const defaultUser: NonAuthUser = {
     firstName: 'James',
     lastName: 'Smith',
     email: 'jsmith@random-domain.com',

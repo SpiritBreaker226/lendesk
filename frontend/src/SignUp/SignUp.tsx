@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FormErrorMessage, SubmitButton, Textbox } from '../Components'
 import postSubmit from '../helpers/postSubmit'
-import { ApiPath, ServerError, User } from '../Types'
+import { ApiPath, ServerError, NonAuthUser } from '../Types'
 import { SignupSchema } from './SignupSchema'
 
 const SignUpContainer = styled.section`
@@ -36,7 +36,7 @@ const ButtonContainer = styled.div`
   margin-top: 8px;
 `
 
-type FormikValues = User & { confirmPassword: string }
+type FormikValues = NonAuthUser & { confirmPassword: string }
 
 export const SignUp: FC = () => {
   const [serverError, setServerError] = useState<ServerError>()
