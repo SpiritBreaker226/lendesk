@@ -1,6 +1,7 @@
 export const theme = {
-  border: 'rgba(81, 81, 81, 1)',
+  border: '#46505a',
   text: '#46505a',
-  background: '#fff',
+  secondary: '#fff',
+  lendeskBlue: '#0084d6',
   error: '#ff0000',
 }
