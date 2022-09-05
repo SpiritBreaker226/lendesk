@@ -32,6 +32,9 @@ describe('SignUp', () => {
     fireEvent.change(screen.getByLabelText('Password'), {
       target: { value: '1Qd*189327' },
     })
+    fireEvent.change(screen.getByLabelText('Confirm Password'), {
+      target: { value: '1Qd*189327' },
+    })
 
     fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }))
   }
@@ -57,6 +60,7 @@ describe('SignUp', () => {
           lastName: 'Bob',
           email: 'bbob@noemail.com',
           password: '1Qd*189327',
+          confirmPassword: '1Qd*189327',
         }
       )
     )

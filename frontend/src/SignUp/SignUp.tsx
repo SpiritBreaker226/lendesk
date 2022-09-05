@@ -36,6 +36,8 @@ const ButtonContainer = styled.div`
   margin-top: 8px;
 `
 
+type FormikValues = User & { confirmPassword: string }
+
 export const SignUp: FC = () => {
   const [serverError, setServerError] = useState<ServerError>()
   const navigate = useNavigate()
@@ -49,16 +51,17 @@ export const SignUp: FC = () => {
 
       <FormErrorMessage error={serverError} />
 
-      <Formik<User>
+      <Formik<FormikValues>
         initialValues={{
           firstName: '',
           lastName: '',
           email: '',
           password: '',
+          confirmPassword: '',
         }}
         validationSchema={SignupSchema}
         onSubmit={async (values) =>
-          postSubmit(
+          postSubmit<FormikValues>(
             ApiPath.signup,
             values,
             () => navigate('thank-you'),
@@ -102,6 +105,16 @@ export const SignUp: FC = () => {
                 label="Password"
                 inputProps={{
                   placeholder: 'password',
+                  type: 'password',
+                  disabled: isSubmitting,
+                }}
+              />
+
+              <Textbox
+                name="confirmPassword"
+                label="Confirm Password"
+                inputProps={{
+                  placeholder: 'confirm password',
                   type: 'password',
                   disabled: isSubmitting,
                 }}
