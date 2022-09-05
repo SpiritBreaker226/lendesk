@@ -1,10 +1,10 @@
-import axios from 'axios'
 import { Form, Formik } from 'formik'
 import { FC, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FormErrorMessage, SubmitButton, Textbox } from '../Components'
-import { ServerError, User } from '../Types'
+import postSubmit from '../helpers/postSubmit'
+import { ApiPath, ServerError, User } from '../Types'
 import { LoginSchema } from './LoginSchema'
 
 const LoginContainer = styled.section`
@@ -32,6 +32,8 @@ const CreateUserOrLogin = styled.div`
   align-items: center;
 `
 
+type FormikValueType = Pick<User, 'email' | 'password'>
+
 export const Login: FC = () => {
   const [serverError, setServerError] = useState<ServerError>()
   const navigate = useNavigate()
@@ -45,37 +47,20 @@ export const Login: FC = () => {
 
       <FormErrorMessage error={serverError} />
 
-      <Formik
+      <Formik<FormikValueType>
         initialValues={{
           email: '',
           password: '',
         }}
         validationSchema={LoginSchema}
-        onSubmit={async (values) => {
-          try {
-            await axios.post(
-              `${process.env.REACT_APP_SERVER_URL}/login`,
-              values
-            )
-
-            navigate('/profile')
-          } catch (error) {
-            if (error instanceof Error) {
-              const errorParts = error.message.split(': ')
-
-              if (errorParts.length === 2) {
-                setServerError({
-                  field: errorParts[0] as keyof User,
-                  errorMessage: errorParts[1],
-                })
-
-                return
-              }
-
-              setServerError({ field: undefined, errorMessage: errorParts[0] })
-            }
-          }
-        }}
+        onSubmit={async (values) =>
+          postSubmit<FormikValueType>(
+            ApiPath.login,
+            values,
+            () => navigate('/profile'),
+            (error) => setServerError(error)
+          )
+        }
       >
         {({ isSubmitting }) => (
           <Form>

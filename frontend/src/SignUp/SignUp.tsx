@@ -1,10 +1,10 @@
-import axios from 'axios'
 import { Form, Formik } from 'formik'
 import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { FormErrorMessage, SubmitButton, Textbox } from '../Components'
-import { ServerError, User } from '../Types'
+import postSubmit from '../helpers/postSubmit'
+import { ApiPath, ServerError, User } from '../Types'
 import { SignupSchema } from './SignupSchema'
 
 const SignUpContainer = styled.section`
@@ -49,7 +49,7 @@ export const SignUp: FC = () => {
 
       <FormErrorMessage error={serverError} />
 
-      <Formik
+      <Formik<User>
         initialValues={{
           firstName: '',
           lastName: '',
@@ -57,31 +57,14 @@ export const SignUp: FC = () => {
           password: '',
         }}
         validationSchema={SignupSchema}
-        onSubmit={async (values) => {
-          try {
-            await axios.post(
-              `${process.env.REACT_APP_SERVER_URL}/signup`,
-              values
-            )
-
-            navigate('thank-you')
-          } catch (error) {
-            if (error instanceof Error) {
-              const errorParts = error.message.split(': ')
-
-              if (errorParts.length === 2) {
-                setServerError({
-                  field: errorParts[0] as keyof User,
-                  errorMessage: errorParts[1],
-                })
-
-                return
-              }
-
-              setServerError({ field: undefined, errorMessage: errorParts[0] })
-            }
-          }
-        }}
+        onSubmit={async (values) =>
+          postSubmit(
+            ApiPath.signup,
+            values,
+            () => navigate('thank-you'),
+            (error) => setServerError(error)
+          )
+        }
       >
         {({ isSubmitting }) => (
           <Form>

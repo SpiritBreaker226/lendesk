@@ -4,6 +4,9 @@ import axios from 'axios'
 import { render } from '../../testUtil'
 import { SignUp } from '../SignUp'
 
+// TODO: IF have time look into if mocking postSubmit is possible so to isloate
+// it form the componets
+
 const mockUseNavigate = jest.fn()
 
 jest.mock('axios')
