@@ -2,10 +2,10 @@ import axios from 'axios'
 
 import { ApiPath, ServerError, NonAuthUser } from '../Types'
 
-async function postSubmit<T = NonAuthUser>(
+async function postSubmit<T = NonAuthUser, R = unknown>(
   type: ApiPath,
   values: T,
-  onSuccess: (values: unknown) => void,
+  onSuccess: (values: R) => void,
   onError: (error: ServerError) => void
 ) {
   try {

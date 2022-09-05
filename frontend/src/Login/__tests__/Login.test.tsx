@@ -8,6 +8,7 @@ import { Login } from '../Login'
 // it form the componets
 
 const mockUseNavigate = jest.fn()
+const mockLogin = jest.fn()
 
 jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
@@ -15,6 +16,11 @@ const mockedAxios = axios as jest.Mocked<typeof axios>
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockUseNavigate,
+}))
+
+jest.mock('../../helpers', () => ({
+  ...jest.requireActual('../../helpers'),
+  login: () => mockLogin,
 }))
 
 describe('login', () => {

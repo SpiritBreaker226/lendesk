@@ -2,9 +2,11 @@ import { Form, Formik } from 'formik'
 import { FC, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+
 import { FormErrorMessage, SubmitButton, Textbox } from '../Components'
+import { login } from '../helpers'
 import postSubmit from '../helpers/postSubmit'
-import { ApiPath, ServerError, NonAuthUser } from '../Types'
+import { ApiPath, ServerError, NonAuthUser, AuthResponse } from '../Types'
 import { LoginSchema } from './LoginSchema'
 
 const LoginContainer = styled.section`
@@ -54,10 +56,14 @@ export const Login: FC = () => {
         }}
         validationSchema={LoginSchema}
         onSubmit={async (values) =>
-          postSubmit<FormikValueType>(
+          postSubmit<FormikValueType, AuthResponse>(
             ApiPath.login,
             values,
-            () => navigate('/profile'),
+            (data) => {
+              navigate('/profile')
+
+              login(data)
+            },
             (error) => setServerError(error)
           )
         }
