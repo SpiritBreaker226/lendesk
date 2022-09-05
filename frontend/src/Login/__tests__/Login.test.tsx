@@ -1,6 +1,7 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, screen, waitFor } from '@testing-library/react'
 import axios from 'axios'
 
+import { render } from '../../testUtil'
 import { Login } from '../Login'
 
 const mockUseNavigate = jest.fn()
