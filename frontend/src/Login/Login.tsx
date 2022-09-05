@@ -3,7 +3,12 @@ import { FC, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { FormErrorMessage, SubmitButton, Textbox } from '../Components'
+import {
+  FormErrorMessage,
+  LendeskLogo,
+  SubmitButton,
+  Textbox,
+} from '../Components'
 import { isAuth, login } from '../helpers'
 import postSubmit from '../helpers/postSubmit'
 import { ApiPath, ServerError, NonAuthUser, AuthResponse } from '../Types'
@@ -17,10 +22,6 @@ const LoginContainer = styled.section`
 const LoginHeaderContainer = styled.header`
   margin: 0 0 16px;
   text-align: center;
-
-  img {
-    width: 200px;
-  }
 `
 
 const LoginHeader = styled.h2`
@@ -47,7 +48,7 @@ export const Login: FC = () => {
   return (
     <LoginContainer>
       <LoginHeaderContainer>
-        <img src="/image/lendesk_logo.svg" alt="Lendesk" />
+        <LendeskLogo />
         <LoginHeader>Login</LoginHeader>
       </LoginHeaderContainer>
 

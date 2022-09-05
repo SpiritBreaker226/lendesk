@@ -2,7 +2,13 @@ import { Form, Formik } from 'formik'
 import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { FormErrorMessage, SubmitButton, Textbox } from '../Components'
+
+import {
+  FormErrorMessage,
+  LendeskLogo,
+  SubmitButton,
+  Textbox,
+} from '../Components'
 import postSubmit from '../helpers/postSubmit'
 import { ApiPath, ServerError, NonAuthUser } from '../Types'
 import { SignupSchema } from './SignupSchema'
@@ -15,10 +21,6 @@ const SignUpContainer = styled.section`
 const SignUpHeaderContainer = styled.header`
   margin: 0 0 16px;
   text-align: center;
-
-  img {
-    width: 200px;
-  }
 `
 
 const SignUpHeader = styled.h2`
@@ -45,7 +47,7 @@ export const SignUp: FC = () => {
   return (
     <SignUpContainer>
       <SignUpHeaderContainer>
-        <img src="/image/lendesk_logo.svg" alt="Lendesk" />
+        <LendeskLogo />
         <SignUpHeader>Create Account</SignUpHeader>
       </SignUpHeaderContainer>
 
