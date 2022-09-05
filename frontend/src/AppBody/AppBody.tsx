@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { RequireAuth } from '../Components'
 import { Login } from '../Login'
+import { PageNotFound } from '../PageNotFound'
 import { Profile } from '../Profile'
 import { SignUp, ThankYou } from '../SignUp'
 
@@ -39,6 +40,7 @@ export const AppBody: FC = () => (
             </RequireAuth>
           }
         />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Content>
   </AppBodyConainer>
