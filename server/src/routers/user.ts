@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { auth } from '../middleware'
+import { auth, userValidateSchema, validateUser } from '../middleware'
 import {
   findByCredentials,
   findById,
@@ -10,16 +10,21 @@ import {
 
 const userRouter = express.Router()
 
-userRouter.post('/users/signup', async (req, res) => {
-  try {
-    const user = await signUp({ ...req.body })
-    const token = await generateAuthToken(user)
+userRouter.post(
+  '/users/signup',
+  userValidateSchema,
+  validateUser,
+  async (req, res) => {
+    try {
+      const user = await signUp({ ...req.body })
+      const token = await generateAuthToken(user)
 
-    res.status(201).send({ user, token })
-  } catch (error) {
-    res.status(400).send({ error: error.message })
+      res.status(201).send({ user, token })
+    } catch (error) {
+      res.status(400).send({ error: error.message })
+    }
   }
-})
+)
 
 userRouter.post('/users/login', async (req, res) => {
   try {
