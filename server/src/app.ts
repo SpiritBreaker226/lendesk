@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import dotenv from 'dotenv'
 
 import userRouter from './routers/user'
@@ -11,6 +12,8 @@ dotenv.config()
 const port = process.env.PORT || 4000
 
 app.use(express.json())
+
+app.use(cors())
 
 app.use(userRouter)
 
