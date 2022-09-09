@@ -1,17 +1,13 @@
 import { Entity, Schema } from 'redis-om'
 
 import { dbClient } from '../../db'
+import { User } from '../../types'
 
 // needs to be here so that User Model have access to the types
 // also needs to be a interface since there is a naming conflect with
 // the UserModel classs if we use type
-export interface UserModel {
+export interface UserModel extends User {
   entityId: string
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  tokens: string[]
 }
 
 export class UserModel extends Entity {
