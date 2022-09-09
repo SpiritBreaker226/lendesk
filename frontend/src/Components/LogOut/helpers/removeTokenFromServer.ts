@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 
+import { getToken } from '../../../helpers'
 import { ApiNamespace, ApiPath } from '../../../Types'
 
 export const removeTokenFromServer = async (
@@ -7,8 +8,12 @@ export const removeTokenFromServer = async (
   onError: (messageFromServer: string) => void
 ) => {
   try {
+    const token = getToken()
+
     await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/${ApiNamespace.users}/${ApiPath.logout}`
+      `${process.env.REACT_APP_SERVER_URL}/${ApiNamespace.users}/${ApiPath.logout}`,
+      {},
+      { headers: { authorization: `Bearer ${token}` } }
     )
 
     onSuccess()
