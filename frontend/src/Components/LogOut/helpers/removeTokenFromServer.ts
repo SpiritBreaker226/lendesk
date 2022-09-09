@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 import { ApiNamespace, ApiPath } from '../../../Types'
 
@@ -13,8 +13,11 @@ export const removeTokenFromServer = async (
 
     onSuccess()
   } catch (error) {
-    if (error instanceof Error) {
-      onError(error.message)
-    }
+    const currentError = error as AxiosError | Error
+    const errorMessage = axios.isAxiosError(currentError)
+      ? (currentError.response?.data as string)
+      : currentError.message
+
+    onError(errorMessage)
   }
 }

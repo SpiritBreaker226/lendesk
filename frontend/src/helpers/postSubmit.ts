@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 import { ApiPath, ServerError, NonAuthUser, ApiNamespace } from '../Types'
 
@@ -17,20 +17,23 @@ async function postSubmit<T = NonAuthUser, R = unknown>(
 
     onSuccess(resposne.data)
   } catch (error) {
-    if (error instanceof Error) {
-      const errorParts = error.message.split(': ')
+    const currentError = error as AxiosError | Error
+    const errorMessage = axios.isAxiosError(currentError)
+      ? (currentError.response?.data as string)
+      : currentError.message
 
-      if (errorParts.length === 2) {
-        onError({
-          field: errorParts[0] as keyof NonAuthUser,
-          errorMessage: errorParts[1],
-        })
+    const errorParts = errorMessage.split(': ')
 
-        return
-      }
+    if (errorParts.length === 2) {
+      onError({
+        field: errorParts[0] as keyof NonAuthUser,
+        errorMessage: errorParts[1],
+      })
 
-      onError({ field: undefined, errorMessage: errorParts[0] })
+      return
     }
+
+    onError({ field: undefined, errorMessage: errorParts[0] })
   }
 }
 
