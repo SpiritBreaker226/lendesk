@@ -1,50 +1,42 @@
 import express from 'express'
 
 import { auth } from '../middleware'
-import { generateAuthToken, User, userRepository } from '../models'
+import {
+  findByCredentials,
+  findById,
+  generateAuthToken,
+  signUp,
+} from '../models'
 
 const userRouter = express.Router()
 
-userRouter.post('/signup', async (req, res) => {
+userRouter.post('/users/signup', async (req, res) => {
   try {
-    const existingUser = await userRepository
-      .search()
-      .where('email')
-      .eq(req.body.email)
-      .returnFirst()
-
-    if (!existingUser) {
-      console.log('existingUser', existingUser)
-      new Error('User is already in database')
-    }
-
-    const user = await User.signUp(req.body)
-    console.log('user', user)
+    const user = await signUp({ ...req.body })
     const token = await generateAuthToken(user)
 
     res.status(201).send({ user, token })
   } catch (error) {
-    console.log('error', error)
-    res.status(401).send(error)
+    res.status(400).send({ error: error.message })
   }
 })
 
-userRouter.post('/login', async (req, res) => {
+userRouter.post('/users/login', async (req, res) => {
   try {
     const { email, password } = req.body
 
-    const user = await User.findByCredentials(email, password)
+    const user = await findByCredentials(email, password)
     const token = await generateAuthToken(user)
 
     res.send({ user, token })
   } catch (error) {
-    res.status(401).send()
+    res.status(401).send().send({ error: error.message })
   }
 })
 
-userRouter.get('/profile/:id', auth, async (req, res) => {
+userRouter.get('/users/:id', auth, async (req, res) => {
   try {
-    const user = await userRepository.fetch(req.params.id)
+    const user = await findById(req.params.id)
 
     if (user) {
       return res.send({ user })
