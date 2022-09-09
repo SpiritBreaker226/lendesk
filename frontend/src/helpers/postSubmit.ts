@@ -1,16 +1,17 @@
 import axios from 'axios'
 
-import { ApiPath, ServerError, NonAuthUser } from '../Types'
+import { ApiPath, ServerError, NonAuthUser, ApiNamespace } from '../Types'
 
 async function postSubmit<T = NonAuthUser, R = unknown>(
   type: ApiPath,
+  namespace: ApiNamespace,
   values: T,
   onSuccess: (values: R) => void,
   onError: (error: ServerError) => void
 ) {
   try {
     const resposne = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/${type}`,
+      `${process.env.REACT_APP_SERVER_URL}/${namespace}/${type}`,
       values
     )
 

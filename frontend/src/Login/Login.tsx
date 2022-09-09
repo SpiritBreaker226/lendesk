@@ -11,7 +11,13 @@ import {
 } from '../Components'
 import { isAuth, login } from '../helpers'
 import postSubmit from '../helpers/postSubmit'
-import { ApiPath, ServerError, NonAuthUser, AuthResponse } from '../Types'
+import {
+  ApiPath,
+  ServerError,
+  NonAuthUser,
+  AuthResponse,
+  ApiNamespace,
+} from '../Types'
 import { LoginSchema } from './LoginSchema'
 
 const LoginContainer = styled.section`
@@ -63,6 +69,7 @@ export const Login: FC = () => {
         onSubmit={async (values) =>
           postSubmit<FormikValueType, AuthResponse>(
             ApiPath.login,
+            ApiNamespace.users,
             values,
             (data) => {
               navigate('/profile')

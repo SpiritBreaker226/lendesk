@@ -11,7 +11,7 @@ import {
   Textbox,
 } from '../Components'
 import postSubmit from '../helpers/postSubmit'
-import { ApiPath, ServerError, NonAuthUser } from '../Types'
+import { ApiPath, ServerError, NonAuthUser, ApiNamespace } from '../Types'
 import { SignupSchema } from './SignupSchema'
 
 const SignUpContainer = styled.section`
@@ -79,6 +79,7 @@ export const SignUp: FC = () => {
         onSubmit={async (values) =>
           postSubmit<FormikValues>(
             ApiPath.signup,
+            ApiNamespace.users,
             values,
             () => navigate('thank-you'),
             (error) => setServerError(error)

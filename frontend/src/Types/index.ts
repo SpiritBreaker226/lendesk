@@ -1,3 +1,4 @@
+export * from './ApiNamespace'
 export * from './ApiPath'
 export * from './AuthResponse'
 export * from './ServerError'
