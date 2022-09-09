@@ -5,6 +5,7 @@ import {
   findByCredentials,
   findById,
   generateAuthToken,
+  logout,
   signUp,
 } from '../models'
 
@@ -36,6 +37,16 @@ userRouter.post('/users/login', async (req, res) => {
     res.send({ user, token })
   } catch (error) {
     res.status(401).send().send({ error: error.message })
+  }
+})
+
+userRouter.post('/users/logout', auth, async (req: AuthRequest, res) => {
+  try {
+    await logout(req.user, req.token)
+
+    res.send()
+  } catch (error) {
+    res.status(500).send()
   }
 })
 

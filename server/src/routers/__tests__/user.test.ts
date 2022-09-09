@@ -100,6 +100,23 @@ describe('/user', () => {
     })
   })
 
+  describe('POST /logout', () => {
+    it.skip('should logout existing user', async () => {
+      await createUser(userOne)
+
+      const res = await request(app).post('/users/logout').expect(200)
+
+      const user = await findById(res.body.user._id)
+
+      expect(user).not.toBeNull()
+      expect(user.tokens.length).toBe(0)
+    })
+
+    it.skip('should not logout nonexistent user', async () => {
+      await request(app).post('/users/logout').expect(500)
+    })
+  })
+
   describe('GET /profile', () => {
     it.skip('should get profile for user', async () => {
       const user = await createUser(userOne)
