@@ -1,5 +1,15 @@
 import { AuthResponse, User } from '../Types'
 
+export const getToken = (): string => {
+  const localStorageTotken = localStorage.getItem('token')
+
+  if (!localStorageTotken) {
+    throw new Error('token not avaiable')
+  }
+
+  return localStorageTotken
+}
+
 export const getUser = (): User | null => {
   const localStorageUser = localStorage.getItem('user')
 
