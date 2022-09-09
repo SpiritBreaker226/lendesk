@@ -1,8 +1,14 @@
+import { NextFunction, Response } from 'express'
 import { verify, JwtPayload } from 'jsonwebtoken'
 
 import { userRepository } from '../models'
+import { AuthRequest } from '../types'
 
-export const auth = async (req, res, next) => {
+export const auth = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const token = req.header('Authorization').replace('Bearer ', '')
 
