@@ -10,11 +10,11 @@ export const getToken = (): string => {
   return localStorageTotken
 }
 
-export const getUser = (): User | null => {
+export const getUser = (): User => {
   const localStorageUser = localStorage.getItem('user')
 
   if (!localStorageUser) {
-    return null
+    throw new Error('user not avaiable')
   }
 
   return JSON.parse(localStorageUser)

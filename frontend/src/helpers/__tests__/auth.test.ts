@@ -49,23 +49,37 @@ describe('auth', () => {
   })
 
   describe('getUser', () => {
-    beforeEach(() => {
-      window.localStorage.clear()
-    })
-
     it('should get user from local stroage', async () => {
-      Storage.prototype.getItem = jest.fn(() => JSON.stringify(user))
+      const localStorgeUser = JSON.stringify(user)
+      const mockGetItem = jest.fn().mockReturnValue(localStorgeUser)
+      const localStorageMock = {
+        getItem: (params: string) => mockGetItem(params),
+      }
+
+      Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+        writable: true,
+      })
 
       const loginUser = getUser()
 
-      expect(loginUser).not.toBeNull()
+      expect(mockGetItem.mock.calls.length).toBe(1)
+      expect(JSON.stringify(loginUser)).toEqual(localStorgeUser)
     })
 
     describe('when is not in local storage', () => {
-      it('should returen null', async () => {
-        const loginUser = getUser()
+      it('should returen throw an error', async () => {
+        const mockGetItem = jest.fn().mockReturnValue(null)
+        const localStorageMock = {
+          getItem: (params: string) => mockGetItem(params),
+        }
 
-        expect(loginUser).toBeNull()
+        Object.defineProperty(window, 'localStorage', {
+          value: localStorageMock,
+          writable: true,
+        })
+
+        expect(getUser).toThrowError()
       })
     })
   })
