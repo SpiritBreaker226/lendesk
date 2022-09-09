@@ -22,6 +22,6 @@ export const ThankYou: FC = () => (
     <ThankYouContent>
       Your details have been save to the database
     </ThankYouContent>
-    <Link to="/home">Click here</Link> to Login
+    <Link to="/">Click here</Link> to Profile page
   </ThankYouContainer>
 )
