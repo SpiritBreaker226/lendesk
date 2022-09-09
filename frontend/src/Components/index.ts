@@ -1,3 +1,4 @@
+export * from './AppHead'
 export * from './Button'
 export * from './FormErrorMessage'
 export * from './LendeskLogo'
