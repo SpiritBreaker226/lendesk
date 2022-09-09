@@ -8,6 +8,7 @@ import {
   logout,
   signUp,
 } from '../models'
+import { AuthRequest } from '../types'
 
 const userRouter = express.Router()
 
@@ -22,7 +23,7 @@ userRouter.post(
 
       res.status(201).send({ user, token })
     } catch (error) {
-      res.status(400).send({ error: error.message })
+      res.status(400).send(error.message)
     }
   }
 )
@@ -36,7 +37,7 @@ userRouter.post('/users/login', async (req, res) => {
 
     res.send({ user, token })
   } catch (error) {
-    res.status(401).send().send({ error: error.message })
+    res.status(401).send(error.message)
   }
 })
 

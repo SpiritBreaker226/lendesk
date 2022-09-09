@@ -30,6 +30,6 @@ export const auth = async (
 
     throw new Error()
   } catch (error) {
-    res.status(401).send({ error: 'Please authenticate.' })
+    res.status(401).send('Please authenticate.')
   }
 }
