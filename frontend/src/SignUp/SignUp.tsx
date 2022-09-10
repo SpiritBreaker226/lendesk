@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import {
   Button,
-  FormErrorMessage,
+  ErrorMessage,
   LendeskLogo,
   SubmitButton,
   Textbox,
@@ -75,7 +75,7 @@ export const SignUp: FC = () => {
         <SignUpHeader>Create Account</SignUpHeader>
       </SignUpHeaderContainer>
 
-      <FormErrorMessage error={serverError} />
+      <ErrorMessage error={serverError} />
 
       <Formik<FormikValues>
         initialValues={{

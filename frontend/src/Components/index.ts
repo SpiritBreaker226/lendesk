@@ -1,6 +1,6 @@
 export * from './AppHead'
 export * from './Button'
-export * from './FormErrorMessage'
+export * from './ErrorMessage'
 export * from './LendeskLogo'
 export * from './LogOut'
 export * from './RequireAuth'

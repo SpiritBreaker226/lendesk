@@ -2,24 +2,29 @@ import { FC } from 'react'
 import styled from 'styled-components'
 import { ServerError } from '../Types'
 
-const FormErrorMessageContianer = styled.div`
+const ErrorMessageContianer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 16px 0;
+  color: ${(props) => props.theme.error};
 `
 
-export type FormErrorMessageProps = {
-  error?: ServerError
+export type ErrorMessageProps = {
+  error?: ServerError | string
 }
 
-export const FormErrorMessage: FC<FormErrorMessageProps> = ({ error }) => {
+export const ErrorMessage: FC<ErrorMessageProps> = ({ error }) => {
   if (!error) {
     return null
   }
 
+  if (typeof error === 'string') {
+    return <ErrorMessageContianer>{error}</ErrorMessageContianer>
+  }
+
   return (
-    <FormErrorMessageContianer>
+    <ErrorMessageContianer>
       {error.field ? (
         <>
           {error.field}: {error.errorMessage}
@@ -27,6 +32,6 @@ export const FormErrorMessage: FC<FormErrorMessageProps> = ({ error }) => {
       ) : (
         error.errorMessage
       )}
-    </FormErrorMessageContianer>
+    </ErrorMessageContianer>
   )
 }

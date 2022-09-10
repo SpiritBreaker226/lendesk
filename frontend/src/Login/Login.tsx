@@ -3,12 +3,7 @@ import { FC, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import {
-  FormErrorMessage,
-  LendeskLogo,
-  SubmitButton,
-  Textbox,
-} from '../Components'
+import { ErrorMessage, LendeskLogo, SubmitButton, Textbox } from '../Components'
 import { useAuth } from '../context'
 import { login } from '../helpers'
 import postSubmit from '../helpers/postSubmit'
@@ -64,7 +59,7 @@ export const Login: FC = () => {
         <LoginHeader>Login</LoginHeader>
       </LoginHeaderContainer>
 
-      <FormErrorMessage error={serverError} />
+      <ErrorMessage error={serverError} />
 
       <Formik<FormikValueType>
         initialValues={{

@@ -6,6 +6,7 @@ import { useAuth } from '../../context'
 import { logout } from '../../helpers'
 import { Types } from '../../Types'
 import { Button } from '../Button'
+import { ErrorMessage } from '../ErrorMessage'
 import { removeTokenFromServer } from './helpers'
 
 const LogOutContianer = styled.div`
@@ -23,9 +24,8 @@ const LogOutButton = styled(Button)`
 }
 `
 
-const ErrorMessageContianer = styled.div`
+const ErrorMessageContianer = styled(ErrorMessage)`
   margin: 8px 0;
-  color: ${(props) => props.theme.error};
 `
 
 export const LogOut: FC = () => {
@@ -63,7 +63,7 @@ export const LogOut: FC = () => {
       <LogOutButton onClick={handleClick} isLoading={isLoading}>
         Logout {user?.firstName} {user?.lastName}
       </LogOutButton>
-      {error && <ErrorMessageContianer>{error}</ErrorMessageContianer>}
+      {<ErrorMessageContianer error={error} />}
     </LogOutContianer>
   )
 }

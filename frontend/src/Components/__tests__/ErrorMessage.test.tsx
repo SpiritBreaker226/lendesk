@@ -2,11 +2,11 @@ import { screen } from '@testing-library/react'
 
 import { render } from '../../testUtil'
 
-import { FormErrorMessage, FormErrorMessageProps } from '../FormErrorMessage'
+import { ErrorMessage, ErrorMessageProps } from '../ErrorMessage'
 
-describe('FormErrorMessage', () => {
-  const setUp = (props: Partial<FormErrorMessageProps> = {}) =>
-    render(<FormErrorMessage {...props} />)
+describe('ErrorMessage', () => {
+  const setUp = (props: Partial<ErrorMessageProps> = {}) =>
+    render(<ErrorMessage {...props} />)
 
   it('should show error message with field', async () => {
     setUp({ error: { field: 'email', errorMessage: 'erroring' } })
@@ -24,5 +24,13 @@ describe('FormErrorMessage', () => {
     const { container } = setUp({ error: undefined })
 
     expect(container).toBeEmptyDOMElement()
+  })
+
+  describe('when error message is a string', () => {
+    it('should display', async () => {
+      setUp({ error: 'erroring' })
+
+      await screen.findByText('erroring')
+    })
   })
 })
