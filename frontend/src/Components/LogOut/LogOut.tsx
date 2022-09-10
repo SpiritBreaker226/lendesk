@@ -61,7 +61,7 @@ export const LogOut: FC = () => {
   return (
     <LogOutContianer>
       <LogOutButton onClick={handleClick} isLoading={isLoading}>
-        Logout
+        Logout {user?.firstName} {user?.lastName}
       </LogOutButton>
       {error && <ErrorMessageContianer>{error}</ErrorMessageContianer>}
     </LogOutContianer>

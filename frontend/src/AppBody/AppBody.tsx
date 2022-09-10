@@ -6,7 +6,7 @@ import { RequireAuth } from '../Components'
 import { Login } from '../Login'
 import { PageNotFound } from '../PageNotFound'
 import { Profile } from '../Profile'
-import { SignUp, ThankYou } from '../SignUp'
+import { SignUp } from '../SignUp'
 
 const AppBodyConainer = styled.main`
   height: 100vh;
@@ -29,9 +29,7 @@ export const AppBody: FC = () => (
     <Content>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />}>
-          <Route path="thank-you" element={<ThankYou />} />
-        </Route>
+        <Route path="/sign-up" element={<SignUp />} />
         <Route
           path="/profile"
           element={

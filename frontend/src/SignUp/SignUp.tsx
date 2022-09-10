@@ -96,7 +96,7 @@ export const SignUp: FC = () => {
 
               login(data)
 
-              navigate('thank-you')
+              navigate('/profile')
             },
             (error) => setServerError(error)
           )
