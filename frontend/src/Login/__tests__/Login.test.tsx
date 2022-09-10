@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react'
 import axios from 'axios'
 
-import { render } from '../../testUtil'
+import { AuthProvider, render, user } from '../../testUtil'
 import { Login } from '../Login'
 
 // TODO: IF have time look into if mocking postSubmit is possible so to isloate
@@ -93,7 +93,11 @@ describe('login', () => {
     it('should redirect to the profile', async () => {
       mockIsAuth = true
 
-      setUp()
+      render(
+        <AuthProvider state={{ user }}>
+          <Login />
+        </AuthProvider>
+      )
 
       expect(screen.queryByText('Create account')).not.toBeInTheDocument()
     })

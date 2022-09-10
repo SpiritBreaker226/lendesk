@@ -9,7 +9,8 @@ import {
   SubmitButton,
   Textbox,
 } from '../Components'
-import { isAuth, login } from '../helpers'
+import { useAuth } from '../context'
+import { login } from '../helpers'
 import postSubmit from '../helpers/postSubmit'
 import {
   ApiPath,
@@ -17,6 +18,7 @@ import {
   NonAuthUser,
   AuthResponse,
   ApiNamespace,
+  Types,
 } from '../Types'
 import { LoginSchema } from './LoginSchema'
 
@@ -46,8 +48,12 @@ type FormikValueType = Pick<NonAuthUser, 'email' | 'password'>
 export const Login: FC = () => {
   const [serverError, setServerError] = useState<ServerError>()
   const navigate = useNavigate()
+  const {
+    state: { user },
+    dispatch,
+  } = useAuth()
 
-  if (isAuth()) {
+  if (user) {
     return <Navigate to="/profile" replace={true} />
   }
 
@@ -72,9 +78,11 @@ export const Login: FC = () => {
             ApiNamespace.users,
             values,
             (data) => {
-              navigate('/profile')
+              dispatch({ type: Types.UpdateUser, payload: { user: data.user } })
 
               login(data)
+
+              navigate('/profile')
             },
             (error) => setServerError(error)
           )

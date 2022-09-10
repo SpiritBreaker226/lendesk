@@ -10,6 +10,7 @@ import {
   SubmitButton,
   Textbox,
 } from '../Components'
+import { useAuth } from '../context'
 import { login } from '../helpers'
 import postSubmit from '../helpers/postSubmit'
 import {
@@ -18,6 +19,7 @@ import {
   NonAuthUser,
   ApiNamespace,
   AuthResponse,
+  Types,
 } from '../Types'
 import { SignupSchema } from './SignupSchema'
 
@@ -62,6 +64,7 @@ type FormikValues = NonAuthUser & { confirmPassword: string }
 export const SignUp: FC = () => {
   const [serverError, setServerError] = useState<ServerError>()
   const navigate = useNavigate()
+  const { dispatch } = useAuth()
 
   const handleCancel = () => navigate('/')
 
@@ -89,9 +92,11 @@ export const SignUp: FC = () => {
             ApiNamespace.users,
             values,
             (data) => {
-              navigate('thank-you')
+              dispatch({ type: Types.UpdateUser, payload: { user: data.user } })
 
               login(data)
+
+              navigate('thank-you')
             },
             (error) => setServerError(error)
           )

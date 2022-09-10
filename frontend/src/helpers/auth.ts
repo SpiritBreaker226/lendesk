@@ -1,4 +1,4 @@
-import { AuthResponse, User } from '../Types'
+import { AuthResponse } from '../Types'
 
 export const getToken = (): string => {
   const localStorageTotken = localStorage.getItem('token')
@@ -10,7 +10,7 @@ export const getToken = (): string => {
   return localStorageTotken
 }
 
-export const getUser = (): User => {
+export const getUser = () => {
   const localStorageUser = localStorage.getItem('user')
 
   if (!localStorageUser) {
@@ -31,6 +31,3 @@ export const logout = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('user')
 }
-
-export const isAuth = (): boolean =>
-  !!localStorage.getItem('user') || !!localStorage.getItem('token')

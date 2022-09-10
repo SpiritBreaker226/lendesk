@@ -2,16 +2,18 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { AppBody } from './AppBody'
 import { AppHead } from './Components'
-import { isAuth } from './helpers'
+import { AuthProvider } from './context'
 import { ThemeProvider } from './theme'
 
 const App = () => (
   <ThemeProvider>
-    <Router>
-      {isAuth() && <AppHead />}
+    <AuthProvider>
+      <Router>
+        <AppHead />
 
-      <AppBody />
-    </Router>
+        <AppBody />
+      </Router>
+    </AuthProvider>
   </ThemeProvider>
 )
 

@@ -1,8 +1,10 @@
 import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { useAuth } from '../../context'
 
 import { logout } from '../../helpers'
+import { Types } from '../../Types'
 import { Button } from '../Button'
 import { removeTokenFromServer } from './helpers'
 
@@ -30,12 +32,17 @@ export const LogOut: FC = () => {
   const navigate = useNavigate()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const {
+    state: { user },
+    dispatch,
+  } = useAuth()
 
   const onSuccess = () => {
     setIsLoading(false)
 
-    // update local storage
+    // update local storage and state mantament
     logout()
+    dispatch({ type: Types.RemoveUser, payloard: {} })
 
     navigate('/', { replace: true })
   }

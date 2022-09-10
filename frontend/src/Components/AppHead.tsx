@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import styled from 'styled-components'
 
+import { useAuth } from '../context'
 import { LendeskLogo } from './LendeskLogo'
 import { LogOut } from './LogOut'
 
@@ -13,12 +14,22 @@ const HeaderContainer = styled.header`
   align-items: center;
 `
 
-export const AppHead: FC = () => (
-  <HeaderContainer>
-    <h1>
-      <LendeskLogo />
-    </h1>
+export const AppHead: FC = () => {
+  const {
+    state: { user },
+  } = useAuth()
 
-    <LogOut />
-  </HeaderContainer>
-)
+  if (!user) {
+    return null
+  }
+
+  return (
+    <HeaderContainer>
+      <h1>
+        <LendeskLogo />
+      </h1>
+
+      <LogOut />
+    </HeaderContainer>
+  )
+}
