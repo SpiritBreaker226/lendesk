@@ -1,5 +1,4 @@
-import { user } from '../../testUtil'
-import { getToken, getUser } from '../auth'
+import { getToken } from '../auth'
 
 describe('auth', () => {
   let originalLocalStorage: Storage
@@ -44,42 +43,6 @@ describe('auth', () => {
         })
 
         expect(getToken).toThrowError()
-      })
-    })
-  })
-
-  describe('getUser', () => {
-    it('should get user from local stroage', async () => {
-      const localStorgeUser = JSON.stringify(user)
-      const mockGetItem = jest.fn().mockReturnValue(localStorgeUser)
-      const localStorageMock = {
-        getItem: (params: string) => mockGetItem(params),
-      }
-
-      Object.defineProperty(window, 'localStorage', {
-        value: localStorageMock,
-        writable: true,
-      })
-
-      const loginUser = getUser()
-
-      expect(mockGetItem.mock.calls.length).toBe(1)
-      expect(JSON.stringify(loginUser)).toEqual(localStorgeUser)
-    })
-
-    describe('when is not in local storage', () => {
-      it('should returen throw an error', async () => {
-        const mockGetItem = jest.fn().mockReturnValue(null)
-        const localStorageMock = {
-          getItem: (params: string) => mockGetItem(params),
-        }
-
-        Object.defineProperty(window, 'localStorage', {
-          value: localStorageMock,
-          writable: true,
-        })
-
-        expect(getUser).toThrowError()
       })
     })
   })

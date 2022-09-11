@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { getUser } from '../helpers'
+import { useAuth } from '../context'
 
 const ProfileContainer = styled.div`
   min-height: 20vh;
@@ -30,29 +30,11 @@ const UserNotFoundContent = styled.p`
 `
 
 export const Profile: FC = () => {
-  try {
-    const user = getUser()
+  const {
+    state: { user },
+  } = useAuth()
 
-    const { email, firstName, lastName } = user
-
-    return (
-      <ProfileContainer>
-        <ProfileHeader>Profile</ProfileHeader>
-
-        <ProfileContent>
-          <strong>Email:</strong>
-          <span>{email}</span>
-        </ProfileContent>
-
-        <ProfileContent>
-          <strong>Name:</strong>
-          <span>
-            {firstName} {lastName}
-          </span>
-        </ProfileContent>
-      </ProfileContainer>
-    )
-  } catch (e) {
+  if (!user) {
     return (
       <UserNotFoundContainer>
         <UserNotFoundContent>User not found</UserNotFoundContent>
@@ -60,4 +42,24 @@ export const Profile: FC = () => {
       </UserNotFoundContainer>
     )
   }
+
+  const { email, firstName, lastName } = user
+
+  return (
+    <ProfileContainer>
+      <ProfileHeader>Profile</ProfileHeader>
+
+      <ProfileContent>
+        <strong>Email:</strong>
+        <span>{email}</span>
+      </ProfileContent>
+
+      <ProfileContent>
+        <strong>Name:</strong>
+        <span>
+          {firstName} {lastName}
+        </span>
+      </ProfileContent>
+    </ProfileContainer>
+  )
 }
