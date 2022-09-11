@@ -1,4 +1,4 @@
-import { checkSchema, validationResult } from 'express-validator'
+import { checkSchema } from 'express-validator'
 
 export const userValidateSchema = checkSchema({
   firstName: {
@@ -37,19 +37,3 @@ export const userValidateSchema = checkSchema({
     },
   },
 })
-
-export const validateUser = (req, res, next) => {
-  const errors = validationResult(req)
-
-  if (errors.isEmpty()) {
-    return next()
-  }
-
-  const extractedErrors = []
-
-  errors.array().map(({ param, msg }) => extractedErrors.push({ [param]: msg }))
-
-  return res.status(422).json({
-    errors: extractedErrors,
-  })
-}

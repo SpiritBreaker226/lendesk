@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { auth, userValidateSchema, validateUser } from '../middleware'
+import { auth, userValidateSchema, validateSchema } from '../middleware'
 import {
   findByCredentials,
   findById,
@@ -13,7 +13,7 @@ const userRouter = express.Router()
 userRouter.post(
   '/users/signup',
   userValidateSchema,
-  validateUser,
+  validateSchema,
   async (req, res) => {
     try {
       const user = await signUp({ ...req.body })
