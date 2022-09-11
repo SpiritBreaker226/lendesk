@@ -7,7 +7,6 @@
     "test": "env-cmd -f ./.test.env jest",
     "test:watch": "yarn test --watch",
     "dev": "ts-node-dev --respawn ./src/app.ts",
-    "db:run": "redis-server",
     "start": "tsc && ts-node ./src/app.ts"
   },
   "author": "",

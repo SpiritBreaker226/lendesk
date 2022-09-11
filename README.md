@@ -40,9 +40,7 @@ Source:
 
  1. In the terminal make sure you are in the project's root directory
  2. Go to the `cd server` directory
- 3. Run `yarn db:run`
- 4. Open another terminal window
- 5. Run `yarn start`
+ 3. Run `yarn start`
 
 ### Frontend
 
