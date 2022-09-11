@@ -1,6 +1,10 @@
 # Lendesk Interview Challenge
 
-## Requirement
+## Table of Contents
+
+[Requirement](#Requirement) | [To Install](#ToInstall) | [To Run](#ToRun)
+
+## <a id="Requirement"></a>Requirement
 
 For Redis to run as a non-cache database, you must install Redis Stack to add in [RedisJSON](https://redis.io/docs/stack/json) so that Node can add objects into Redis to store user data. And [RedisSearch](https://redis.io/docs/stack/search) to have more complex searching in the application.
 
@@ -13,7 +17,7 @@ Source:
  4. Run `redis-stack-server`
  5. Open another terminal window to install the project
 
-## To Install
+## <a id="ToInstall"></a>To Install
 
 ### Server
 
@@ -29,7 +33,7 @@ Source:
  3. Run `yarn`
  4. Run `cp .env.example .env`
 
-## To Run
+## <a id="ToRun"></a>To Run
 
 ### Server
 
