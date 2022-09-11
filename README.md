@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-[Requirement](#Requirement) | [To Install](#ToInstall) | [To Run](#ToRun)
+[Requirement](#Requirement) | [To Install](#ToInstall) | [To Run](#ToRun) | [Notes](#Notes)
 
 ## <a id="Requirement"></a>Requirement
 
@@ -47,3 +47,9 @@ Source:
  1. In the terminal make sure you are in the project's root directory
  2. Go to the `cd frontend` directory
  3. Run `yarn start`
+
+## <a id="Notes"></a>Notes
+
+### NodeJS Server Tests
+
+There is an issue where the Redis database does not work well in a testing environment in NodeJS. As a result, any test will fail. However, I created the tests to show what tests would look like.
