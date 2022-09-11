@@ -25,6 +25,7 @@ Source:
  2. Go to the `cd server` directory
  3. Run `yarn`
  4. Run `cp .env.example .env`
+ 5. open `.env` add a randome string to `JWT_SERECT`
 
 ### Frontend
 
