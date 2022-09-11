@@ -53,3 +53,7 @@ Source:
 ### NodeJS Server Tests
 
 There is an issue where the Redis database does not work well in a testing environment in NodeJS. As a result, any test will fail. However, I created the tests to show what tests would look like.
+
+### Profile Page Data
+
+In the profile, getting the user details from the Auth provider could be considered the cache since there is no update on the user's part. There is a need to add a call to the server to get the details. Even if that were the case, I would update the local user details once all of the validation has passed. Making it look like the update was fast. Even if the server is slow to update, the application seems faster than it is to the user. Thus, having a better user experience.
