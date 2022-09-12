@@ -11,7 +11,6 @@ import {
   ApiPath,
   ServerError,
   NonAuthUser,
-  AuthResponse,
   ApiNamespace,
   Types,
 } from '../Types'
@@ -68,7 +67,7 @@ export const Login: FC = () => {
         }}
         validationSchema={LoginSchema}
         onSubmit={async (values) =>
-          postSubmit<FormikValueType, AuthResponse>(
+          postSubmit<FormikValueType>(
             ApiPath.login,
             ApiNamespace.users,
             values,

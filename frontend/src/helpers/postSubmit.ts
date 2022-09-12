@@ -1,12 +1,18 @@
 import axios, { AxiosError } from 'axios'
 
-import { ApiPath, ServerError, NonAuthUser, ApiNamespace } from '../Types'
+import {
+  ApiPath,
+  ServerError,
+  NonAuthUser,
+  ApiNamespace,
+  AuthResponse,
+} from '../Types'
 
-async function postSubmit<T = NonAuthUser, R = unknown>(
+async function postSubmit<T = NonAuthUser>(
   type: ApiPath,
   namespace: ApiNamespace,
   values: T,
-  onSuccess: (values: R) => void,
+  onSuccess: (values: AuthResponse) => void,
   onError: (error: ServerError) => void
 ) {
   try {

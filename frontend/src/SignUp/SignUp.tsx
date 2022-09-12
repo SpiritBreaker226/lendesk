@@ -18,7 +18,6 @@ import {
   ServerError,
   NonAuthUser,
   ApiNamespace,
-  AuthResponse,
   Types,
 } from '../Types'
 import { SignupSchema } from './SignupSchema'
@@ -94,7 +93,7 @@ export const SignUp: FC = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={async (values) =>
-          postSubmit<FormikValues, AuthResponse>(
+          postSubmit<FormikValues>(
             ApiPath.signup,
             ApiNamespace.users,
             values,
