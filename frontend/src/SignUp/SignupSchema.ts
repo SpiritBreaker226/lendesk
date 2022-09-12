@@ -14,7 +14,7 @@ export const SignupSchema = Yup.object().shape({
     .min(8, 'Password is too short')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      'Password must contain 8 characters that is 1 uppercase, 1 lowercase, 1 number and 1 special case character (i.e. !@#_#$-%)'
+      'Invalid password'
     )
     .required('Password is required'),
   confirmPassword: Yup.string().oneOf(

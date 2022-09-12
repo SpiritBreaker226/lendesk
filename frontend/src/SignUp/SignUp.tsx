@@ -43,6 +43,13 @@ const FormGroup = styled.fieldset`
   margin-bottom: 16px;
 `
 
+const PasswordConainer = styled.div`
+  h4,
+  ul {
+    margin: 0 0 16px;
+  }
+`
+
 const ButtonContainer = styled.div`
   margin-top: 8px;
   display: flex;
@@ -142,6 +149,16 @@ export const SignUp: FC = () => {
                   disabled: isSubmitting,
                 }}
               />
+              <PasswordConainer>
+                <h4>Password must contain:</h4>
+                <ul>
+                  <li>8 characters</li>
+                  <li>1 uppercase</li>
+                  <li>1 lowercase</li>
+                  <li>1 number</li>
+                  <li>1 special case character (i.e. !@#_#$-%)</li>
+                </ul>
+              </PasswordConainer>
 
               <Textbox
                 name="confirmPassword"
