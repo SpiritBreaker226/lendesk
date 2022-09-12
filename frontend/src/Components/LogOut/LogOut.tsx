@@ -19,7 +19,6 @@ const LogOutButton = styled(Button)`
   color: ${(props) => props.theme.text};
   font-weight: 600;
   font-size: 16px;
-  cursor: pointer;
   padding: 8px 0;
 }
 `

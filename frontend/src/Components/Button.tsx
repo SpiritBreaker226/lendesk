@@ -5,6 +5,7 @@ const ButtonContainer = styled.button`
   padding: 8px 16px;
   border: 1px solid ${(props) => props.theme.secondary};
   border-radius: 4px;
+  cursor: pointer;
 `
 
 export type ButtonProps = {
