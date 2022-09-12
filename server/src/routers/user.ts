@@ -5,7 +5,7 @@ import {
   findByCredentials,
   findById,
   generateAuthToken,
-  logout,
+  removeToken,
   signUp,
 } from '../models'
 import { AuthRequest } from '../types'
@@ -43,7 +43,7 @@ userRouter.post('/users/login', async (req, res) => {
 
 userRouter.post('/users/logout', auth, async (req: AuthRequest, res) => {
   try {
-    await logout(req.user, req.token)
+    await removeToken(req.user, req.token)
 
     res.send()
   } catch (error) {
