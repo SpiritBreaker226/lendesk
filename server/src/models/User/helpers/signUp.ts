@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
-import { User } from '../../../types'
+import { v4 as uuidv4 } from 'uuid'
 
+import { User } from '../../../types'
 import { userRepository } from '../UserModel'
 import { isExistingUser } from './isExistingUser'
 
@@ -15,6 +16,7 @@ export const signUp = async (user: Omit<User, 'tokens'>) => {
 
   const hashedPassword = await bcrypt.hash(password, 12)
   const newUser = userRepository.createAndSave({
+    id: uuidv4(),
     firstName,
     lastName,
     email,

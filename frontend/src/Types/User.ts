@@ -4,6 +4,10 @@ export type User = {
   email: string
 }
 
+export type AuthUser = {
+  id: string
+} & User
+
 export type NonAuthUser = {
   password: string
 } & User

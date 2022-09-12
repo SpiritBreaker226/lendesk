@@ -16,7 +16,7 @@ export const auth = async (
 
     const user = await userRepository
       .search()
-      .where('email')
+      .where('id')
       .eq(decoded._id)
       .and('tokens')
       .contain(token)

@@ -25,6 +25,7 @@ export class UserModel extends Entity {
 // needs to be close to the fetch as Redis om does not like having
 // schema in another file
 export const userSchema = new Schema(UserModel, {
+  id: { type: 'string' },
   firstName: { type: 'string' },
   lastName: { type: 'string' },
   email: { type: 'string' },
